@@ -1,0 +1,54 @@
+{
+  "name": "@redisrupt/red-svg-icons",
+  "version": "6.0.4",
+  "description": "SVG icons for reva projects",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'build/**/*.js'",
+    "autofix": "npm run check -- --fix",
+    "changelog": "changelogx --config changelogx.config.js -f markdown -o ./changelog.md",
+    "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
+    "install-hooks": "changelogx install-hook",
+    "pre-v": "npm run check",
+    "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
+    "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
+    "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
+    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v",
+    "prepublishOnly": "npm run build",
+    "build": "rm -rf dist/ && node --require @babel/register build/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Redisrupt/red-svg-icons.git"
+  },
+  "keywords": [],
+  "author": "Reva Inc.",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Redisrupt/red-svg-icons/issues"
+  },
+  "homepage": "https://github.com/Redisrupt/red-svg-icons#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.1",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/register": "^7.10.1",
+    "@redisrupt/eslint-red": "6.0.0",
+    "changelogx": "5.0.4",
+    "cheerio": "1.0.0-rc.3",
+    "clix-logger": "^2.0.0",
+    "css": "^3.0.0",
+    "lodash.startcase": "^4.4.0",
+    "mkdirp": "0.5.1",
+    "react-native-expo-svg": "^1.1.2"
+  },
+  "peerDependencies": {
+    "react-native-svg": "^12.1.0"
+  }
+}
